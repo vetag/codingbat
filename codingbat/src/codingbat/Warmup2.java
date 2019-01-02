@@ -2,10 +2,114 @@ package codingbat;
 
 public class Warmup2 {
 
+	/*
+	Given a string, return the count of the number of times that a substring length 2 appears in the string and 
+	also as the last 2 chars of the string, so "hixxxhi" yields 1 (we won't count the end substring).
+	 */
+	public static int last2(String str) {
+		int doublecount = 0;
+		if(str.length() <= 1) {
+			return doublecount;
+		}
+		String two_char = str.substring(str.length()-2, str.length());
+		for(int i=0; i<str.length()-2; i++) {
+			String matchingChar = str.substring(i, i + 2);
+			System.out.println(matchingChar);
+			if(matchingChar.equals(two_char)) {
+				doublecount++;
+			}
+		}
+		System.out.println(two_char);
+		return doublecount;
+	}
+
+	/*
+	 * Given an array of ints, return true if the sequence of numbers 1, 2, 3 appears in the array somewhere.
+	 */
+	public static boolean array123(int[] nums) {
+		boolean ping1 = false;
+		boolean ping2 = false;
+		boolean ping3 = false;
+		for(int i = 0; i < nums.length; i++) {
+			if(nums[i] == 1) {
+				ping1 = true;
+			}
+			if(nums[i] == 2) {
+				ping2 = true;
+			}
+			if(nums[i] == 3) {
+				ping3 = true;
+			}
+		}
+		return ping1 && ping2 && ping3; 
+	}
+
+	/*
+	 * Given a string, return a string made of the chars at indexes 0,1, 4,5, 8,9 ... so "kittens" yields "kien".
+	 */
+	public static String altPairs(String str) {
+		String firstChar = "";
+		String secondChar = "";
+		String outputString = "";
+		for(int i=0; i < str.length(); i += 4) {
+			firstChar = str.substring(i, i + 1);
+			if ((i + 2) <= str.length()) {
+				secondChar = str.substring(i + 1, i + 2);
+				outputString = outputString + firstChar + secondChar;
+			}
+			else {
+				outputString = outputString + firstChar;
+			}
+		}
+		return outputString;
+	}
+
+	/*
+	 * Given an array of ints, we'll say that a triple is a value appearing 3
+	 * times in a row in the array. Return true if the array does not contain any triples.
+	 */
+	public static boolean noTriples(int[] nums) {
+		if(nums.length <= 2) {
+			return true;
+		}
+		for(int i = 0; i <= nums.length - 2; i++) {
+			int a = nums[i];
+			if(a == nums[i+1] && a == nums[i+2]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/*
+	 * Given a string and a non-negative int n, we'll say that the front of the string 
+	 * is the first 3 chars, or whatever is there if the string is less than length 3. Return n copies of the front;
+	 */
+	public static String frontTimes(String str, int n) {
+		String firstThree = "";
+		String copies = "";
+		if(str.length() >= 3) {
+			firstThree = str.substring(0, 3);
+		}
+		if(str.length() == 2) {
+			firstThree = str.substring(0,2);
+		}
+		else if(str.length() == 1) {
+			firstThree = str.substring(0,1);
+		}
+		else if(str.length() == 0) {
+			return "";
+		}
+		for(int i = 0; i < n; i++) {
+			copies = copies + firstThree;
+		}
+		return copies;
+	}
 
 	/*
 	 * Given a string, return a new string made of every other char starting with the first, so "Hello" yields "Hlo".
 	 */
+
 	public static String stringBits(String str) {
 		String str1 = "";
 		String str2 = "";
@@ -182,7 +286,23 @@ public class Warmup2 {
 		}
 		return result;
 	}
+
 	public static void main(String[] args) {
+
+		//		last2
+		//		System.out.println(Warmup2.last2("xaxxaxaxx"));
+
+		//		array123
+		//		int[] nums = {1,2,5,6};
+		//		System.out.println(Warmup2.array123(nums));
+
+		//		altPairs
+		//		System.out.println(Warmup2.altPairs("kitten"));
+
+		//		int[] nums = {1,1,2,2,2,1};
+		//		System.out.println(Warmup2.noTriples(nums));
+
+		//		System.out.println(Warmup2.frontTimes("a", 4));
 
 		//stringBits
 		//		System.out.println(new Warmup2().stringBits("Hello"));
